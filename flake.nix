@@ -14,9 +14,13 @@
 		devShells = forAllSystems (pkgs: {
 			default = pkgs.mkShell {
 				packages = with pkgs; [
+					# Build Tools
 					cmake
 					gcc
 					gnumake
+					
+					# Debugging Tools
+					gdb
 				];
 
 				shellHook = ''
