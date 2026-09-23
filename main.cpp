@@ -51,20 +51,40 @@ void printTreeBFS(std::shared_ptr<Node>& node) {
 	std::cout << output << std::endl;
 }
 
-void printTreeDFS(std::shared_ptr<Node>& node) {
+void printTreeDFS_recursive(std::shared_ptr<Node>& node) {
 	// Recursive Solution.
 	std::cout << node->value << ' ';
 	if(node->left)
-		printTreeDFS(node->left);
+		printTreeDFS_recursive(node->left);
 	if(node->right)
-		printTreeDFS(node->right);
+		printTreeDFS_recursive(node->right);
+}
+
+void printTreeDFS_iterative(std::shared_ptr<Node>& node) {
+	// Iterative Solution.
+	std::vector<std::shared_ptr<Node>> stack;
+	stack.push_back(node);
+	while(!stack.empty()) {
+
+		std::cout << node->value << ' ';
+		
+		if(node->right)
+			stack.push_back(node->right);
+		if(node->left)
+			stack.push_back(node->left);
+
+		node = stack.back(); stack.pop_back();
+	}
 }
 
 int main() {
 	std::shared_ptr<Node> tree = exampleTree();
 	std::cout << "Printing BFS Search of Example Tree!" << std::endl << std::endl;
 	printTreeBFS(tree);
-	std::cout << "Printing DFS Search of Example Tree!" << std::endl << std::endl;
-	printTreeDFS(tree);
+	std::cout << "Printing Recursive DFS Search of Example Tree!" << std::endl << std::endl;
+	printTreeDFS_recursive(tree);
+	std::cout << std::endl;
+	std::cout << "Printing Iterative DFS Search of Example Tree!" << std::endl << std::endl;
+	printTreeDFS_iterative(tree);
 	return 0;
 }
