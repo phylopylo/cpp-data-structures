@@ -77,6 +77,49 @@ void printTreeDFS_iterative(std::shared_ptr<Node>& node) {
 	}
 }
 
+std::shared_ptr<Node> build(std::vector<std::shared_ptr<Node>>& array, int start, int end) {
+	if(start >= end) return nullptr;
+	int midpoint = start + (end - start) / 2;
+	std::shared_ptr<Node> root = array[midpoint];
+	root->left = build(array, start, midpoint);
+	root->right = build(array, midpoint + 1, end);
+	return root;
+}
+
+std::shared_ptr<Node> rebuildBalancedTree(std::shared_ptr<Node>& node) {
+
+	// First, construct a queue of Nodes.
+	std::vector<std::shared_ptr<Node>> array;
+	array.push_back(node);
+
+	unsigned int i = 0;
+	while(i < array.size()) {
+
+		std::shared_ptr<Node> cur = array[i];
+
+		std::shared_ptr<Node> L = cur->left; // Left Child 
+		if(L != nullptr) {
+			array.push_back(L);
+		}
+
+		std::shared_ptr<Node> R = cur->right; // Right Child
+		if(R != nullptr) {
+			array.push_back(R);
+		}
+		i++;
+	}
+	
+	// Sort the vector
+	std::sort(array.begin(), array.end(),
+	    [](const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b) {
+		return a->value < b->value;
+	    });
+
+
+	// Rebuild the Tree
+	return build(array, 0, array.size());
+}
+
 int main() {
 	std::shared_ptr<Node> tree = exampleTree();
 	std::cout << "Printing BFS Search of Example Tree!" << std::endl << std::endl;
@@ -86,5 +129,12 @@ int main() {
 	std::cout << std::endl;
 	std::cout << "Printing Iterative DFS Search of Example Tree!" << std::endl << std::endl;
 	printTreeDFS_iterative(tree);
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	std::cout << "Rebalancing tree by traversing, sorting, and recreating." << std::endl << std::endl;
+	tree = rebuildBalancedTree(tree);
+	std::cout << "Printing BFS Search of Example Tree!" << std::endl << std::endl;
+	printTreeBFS(tree);
 	return 0;
 }
