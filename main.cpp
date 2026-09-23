@@ -48,12 +48,23 @@ void printTreeBFS(std::shared_ptr<Node>& node) {
 		}
 		i++;
 	}
-	std::cout << output;
+	std::cout << output << std::endl;
+}
+
+void printTreeDFS(std::shared_ptr<Node>& node) {
+	// Recursive Solution.
+	std::cout << node->value << ' ';
+	if(node->left)
+		printTreeDFS(node->left);
+	if(node->right)
+		printTreeDFS(node->right);
 }
 
 int main() {
 	std::shared_ptr<Node> tree = exampleTree();
 	std::cout << "Printing BFS Search of Example Tree!" << std::endl << std::endl;
 	printTreeBFS(tree);
+	std::cout << "Printing DFS Search of Example Tree!" << std::endl << std::endl;
+	printTreeDFS(tree);
 	return 0;
 }
