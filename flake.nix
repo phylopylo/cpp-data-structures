@@ -21,6 +21,7 @@
 					
 					# Debugging Tools
 					gdb
+					valgrind
 				];
 
 				shellHook = ''
