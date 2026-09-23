@@ -1,3 +1,6 @@
+init-cmake:
+	cmake -S . -B build
+.PHONY: init-cmake
 
 build:
 	cmake --build build
