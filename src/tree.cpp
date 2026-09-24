@@ -120,7 +120,7 @@ std::shared_ptr<Node> rebuildBalancedTree(std::shared_ptr<Node>& node) {
 	return build(array, 0, array.size());
 }
 
-int main() {
+void tree_demo() {
 	std::shared_ptr<Node> tree = exampleTree();
 	std::cout << "Printing BFS Search of Example Tree!" << std::endl << std::endl;
 	printTreeBFS(tree);
@@ -136,5 +136,4 @@ int main() {
 	tree = rebuildBalancedTree(tree);
 	std::cout << "Printing BFS Search of Example Tree!" << std::endl << std::endl;
 	printTreeBFS(tree);
-	return 0;
 }
