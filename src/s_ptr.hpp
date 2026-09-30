@@ -6,9 +6,13 @@ class s_ptr {
 
 public:
 	
-	explicit s_ptr(T* data) : data(data) references(new int(1)) {};
-	explicit s_ptr(const s_ptr& other) : data(other.data) references(other.references) {references++;};
-	explicit s_ptr& operator=(const s_ptr& other) : data(other.data) references(other.references) {references++;};
+	explicit s_ptr(T* data) : data(data), references(new int(1)) {};
+	explicit s_ptr(const s_ptr& other) : data(other.data), references(other.references) {references++;};
+	s_ptr& operator=(const s_ptr& other) {
+		data = other.data;
+		references = other.references;
+		references++;
+	};
 
 	T* get() { return data; };
 	T& operator*() { return *data; };
@@ -21,4 +25,8 @@ public:
 			delete references;
 		};
 	};
+};
+
+void shared_pointer_demo() {
+	printf("shared pointer demo!!!");
 };
