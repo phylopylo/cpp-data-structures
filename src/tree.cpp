@@ -4,6 +4,8 @@
 #include <format>
 #include <memory>
 
+#include <philip/s_ptr.hpp>
+
 class Node {
 public:
 	Node(int value) : value(value) {}
@@ -121,6 +123,8 @@ std::shared_ptr<Node> rebuildBalancedTree(std::shared_ptr<Node>& node) {
 }
 
 void tree_demo() {
+
+	s_ptr<int> ptr = s_ptr<int>::make_s_ptr(5);
 	std::shared_ptr<Node> tree = exampleTree();
 	std::cout << "Printing BFS Search of Example Tree!" << std::endl << std::endl;
 	printTreeBFS(tree);

@@ -1,8 +1,11 @@
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <string>
 #include <format>
 #include <memory>
+#include <philip/s_ptr.hpp>
 
 class Node {
 public:

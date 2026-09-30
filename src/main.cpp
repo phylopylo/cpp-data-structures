@@ -1,6 +1,12 @@
-#include "tree.hpp"
-#include "u_ptr.hpp"
-#include "s_ptr.hpp"
+#include <iostream>
+#include <vector>
+#include <string>
+#include <format>
+#include <memory>
+
+#include "philip/u_ptr.hpp"
+#include "philip/tree.hpp"
+#include "philip/s_ptr.hpp"
 
 
 int main() {
@@ -8,10 +14,10 @@ int main() {
 	// unique_pointer_demo();
 	
 	// shared pointer from scratch
-	shared_pointer_demo();
+	// shared_pointer_demo();
 
 	// BFS/DFS Traversal and Binary Tree Construction
-	//tree_demo();
+	tree_demo();
 	
 	return 0;
 }
