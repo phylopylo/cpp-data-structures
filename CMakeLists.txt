@@ -6,6 +6,7 @@ add_executable(main
 	src/main.cpp
 	src/tree.cpp
 	src/u_ptr.hpp
+	src/s_ptr.hpp
 )
 
 target_include_directories(main PRIVATE include)
