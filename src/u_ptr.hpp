@@ -1,11 +1,9 @@
-#include "tree.hpp"
-
 template <typename T>
 class u_ptr {
 	T* data;
 
 public:
-	explicit u_ptr(T* data) : data(data) { printf("Constructing u_ptr data %d\n", data); }
+	explicit u_ptr(T* data) : data(data) {};
 
 	// Getter
 	T* get() {
@@ -32,24 +30,10 @@ public:
 
 void unique_pointer_demo() {
 	int x = 5; // stack allocated
-	int* ptr;
 	{
 		u_ptr<int> int_ptr = (u_ptr<int>) new int;
 		*int_ptr = x;
 		printf("address of u_ptr: %p, data in u_ptr: %d", int_ptr.get(), *int_ptr);
 
-		ptr = int_ptr.get();
 	}
-	// Throws ASAN error: heap-use-after-free
-	// printf("testing if data is still in memory: %d", *ptr);
-
-}
-
-int main() {
-	// BFS/DFS Traversal and Binary Tree Construction
-	// tree_demo();
-	
-	// Unique Pointer Demo
-	unique_pointer_demo();
-	return 0;
 }

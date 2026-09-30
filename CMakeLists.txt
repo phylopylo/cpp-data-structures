@@ -5,6 +5,7 @@ project("C++ Data Structures" LANGUAGES CXX)
 add_executable(main
 	src/main.cpp
 	src/tree.cpp
+	src/u_ptr.hpp
 )
 
 target_include_directories(main PRIVATE include)
