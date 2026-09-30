@@ -35,6 +35,10 @@ public:
 		other.references = nullptr;
 	};
 
+	static s_ptr make_s_ptr(T data) {
+		return (s_ptr<T>) new T(data);
+	};
+
 	T* get() { return data; };
 	T& operator*() { return *data; };
 	T* operator->() { return data; };
@@ -50,8 +54,9 @@ public:
 	};
 };
 
+
 void shared_pointer_demo() {
 	std::cout << "shared pointer demo!!!" << std::endl << std::endl;
-	s_ptr<uint32_t> epic_pointer = s_ptr<uint32_t>(new uint32_t(5));
+	s_ptr<uint32_t> epic_pointer = s_ptr<uint32_t>::make_s_ptr(5);
 	s_ptr<uint32_t> copy_of_epic_pointer = epic_pointer;
 };
