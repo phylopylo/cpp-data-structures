@@ -11,40 +11,40 @@ public:
 	Node(int value) : value(value) {}
 
 	int value;
-	std::shared_ptr<Node> left{nullptr};
-	std::shared_ptr<Node> right{nullptr};
+	s_ptr<Node> left{nullptr};
+	s_ptr<Node> right{nullptr};
 };
 
-std::shared_ptr<Node> exampleTree() {
+s_ptr<Node> exampleTree() {
 
 	// Use Nodes to construct an example tree
-	std::shared_ptr<Node> root = std::make_shared<Node>(3);
-	root->left = std::make_shared<Node>(8);
-	root->right = std::make_shared<Node>(4);
-	root->left->left = std::make_shared<Node>(6);
-	root->left->right = std::make_shared<Node>(4);
-	root->right->left = std::make_shared<Node>(7);
-	root->right->right = std::make_shared<Node>(2);
+	s_ptr<Node> root = s_ptr<Node>::make_s_ptr(3);
+	root->left = s_ptr<Node>::make_s_ptr(8);
+	root->right = s_ptr<Node>::make_s_ptr(4);
+	root->left->left = s_ptr<Node>::make_s_ptr(6);
+	root->left->right = s_ptr<Node>::make_s_ptr(4);
+	root->right->left = s_ptr<Node>::make_s_ptr(7);
+	root->right->right = s_ptr<Node>::make_s_ptr(2);
 	return root;
 };
 
-void printTreeBFS(std::shared_ptr<Node>& node) {
-	std::vector<std::shared_ptr<Node>> queue;
+void printTreeBFS(s_ptr<Node>& node) {
+	std::vector<s_ptr<Node>> queue;
 	queue.push_back(node);
 
 	std::string output;
 	unsigned int i(0);
 	while(i < queue.size()) {
 
-		std::shared_ptr<Node> cur = queue[i];
+		s_ptr<Node> cur = queue[i];
 		output += std::format("{} ", cur->value);
 
-		std::shared_ptr<Node> L = cur->left; // Left Child 
+		s_ptr<Node> L = cur->left; // Left Child 
 		if(L != nullptr) {
 			queue.push_back(L);
 		}
 
-		std::shared_ptr<Node> R = cur->right; // Right Child
+		s_ptr<Node> R = cur->right; // Right Child
 		if(R != nullptr) {
 			queue.push_back(R);
 		}
@@ -53,7 +53,7 @@ void printTreeBFS(std::shared_ptr<Node>& node) {
 	std::cout << output << std::endl;
 }
 
-void printTreeDFS_recursive(std::shared_ptr<Node>& node) {
+void printTreeDFS_recursive(s_ptr<Node>& node) {
 	// Recursive Solution.
 	std::cout << node->value << ' ';
 	if(node->left)
@@ -62,9 +62,9 @@ void printTreeDFS_recursive(std::shared_ptr<Node>& node) {
 		printTreeDFS_recursive(node->right);
 }
 
-void printTreeDFS_iterative(std::shared_ptr<Node>& node) {
+void printTreeDFS_iterative(s_ptr<Node>& node) {
 	// Iterative Solution.
-	std::vector<std::shared_ptr<Node>> stack;
+	std::vector<s_ptr<Node>> stack;
 	stack.push_back(node);
 	while(!stack.empty()) {
 
@@ -79,32 +79,32 @@ void printTreeDFS_iterative(std::shared_ptr<Node>& node) {
 	}
 }
 
-std::shared_ptr<Node> build(std::vector<std::shared_ptr<Node>>& array, int start, int end) {
+s_ptr<Node> build(std::vector<s_ptr<Node>>& array, int start, int end) {
 	if(start >= end) return nullptr;
 	int midpoint = start + (end - start) / 2;
-	std::shared_ptr<Node> root = array[midpoint];
+	s_ptr<Node> root = array[midpoint];
 	root->left = build(array, start, midpoint);
 	root->right = build(array, midpoint + 1, end);
 	return root;
 }
 
-std::shared_ptr<Node> rebuildBalancedTree(std::shared_ptr<Node>& node) {
+s_ptr<Node> rebuildBalancedTree(s_ptr<Node>& node) {
 
 	// First, construct a queue of Nodes.
-	std::vector<std::shared_ptr<Node>> array;
+	std::vector<s_ptr<Node>> array;
 	array.push_back(node);
 
 	unsigned int i = 0;
 	while(i < array.size()) {
 
-		std::shared_ptr<Node> cur = array[i];
+		s_ptr<Node> cur = array[i];
 
-		std::shared_ptr<Node> L = cur->left; // Left Child 
+		s_ptr<Node> L = cur->left; // Left Child 
 		if(L != nullptr) {
 			array.push_back(L);
 		}
 
-		std::shared_ptr<Node> R = cur->right; // Right Child
+		s_ptr<Node> R = cur->right; // Right Child
 		if(R != nullptr) {
 			array.push_back(R);
 		}
@@ -113,7 +113,7 @@ std::shared_ptr<Node> rebuildBalancedTree(std::shared_ptr<Node>& node) {
 	
 	// Sort the vector
 	std::sort(array.begin(), array.end(),
-	    [](const std::shared_ptr<Node>& a, const std::shared_ptr<Node>& b) {
+	    [](s_ptr<Node>& a, s_ptr<Node>& b) {
 		return a->value < b->value;
 	    });
 
@@ -125,7 +125,8 @@ std::shared_ptr<Node> rebuildBalancedTree(std::shared_ptr<Node>& node) {
 void tree_demo() {
 
 	s_ptr<int> ptr = s_ptr<int>::make_s_ptr(5);
-	std::shared_ptr<Node> tree = exampleTree();
+
+	s_ptr<Node> tree = exampleTree();
 	std::cout << "Printing BFS Search of Example Tree!" << std::endl << std::endl;
 	printTreeBFS(tree);
 	std::cout << "Printing Recursive DFS Search of Example Tree!" << std::endl << std::endl;
