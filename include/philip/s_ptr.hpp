@@ -29,6 +29,13 @@ public:
 	};
 
 	s_ptr& operator=(const s_ptr& other) {
+		if (references){
+			(*references)--;
+			if ((*references) == 0) {
+				delete data;
+				delete references;
+			};
+		}
 		data = other.data;
 		references = other.references;
 		(*references)++;
@@ -44,6 +51,13 @@ public:
 	};
 
 	s_ptr& operator=(s_ptr&& other) noexcept {
+		if (references){
+			(*references)--;
+			if ((*references) == 0) {
+				delete data;
+				delete references;
+			};
+		}
 		data = other.data;
 		references = other.references;
 		other.data = nullptr;
@@ -69,7 +83,7 @@ public:
 	};
 
 	operator bool() const {
-		return data == nullptr;
+		return data != nullptr;
 	};
 
 	~s_ptr() {
