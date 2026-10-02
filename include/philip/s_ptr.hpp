@@ -97,3 +97,5 @@ public:
 		};
 	};
 };
+
+void shared_pointer_demo();

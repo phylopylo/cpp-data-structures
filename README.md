@@ -1,5 +1,9 @@
 # C++ Data Structures
 
+In this repository:
+ - Implemented unique pointer and smart pointer classes from scratch
+ - Implemented Binary Tree using smart pointer implementation
+
 # nix
 
 `flake.nix` defines the development environment. To regenerate `flake.lock`, run `nix flake update`. To activate the development environment, run `nix develop`.
